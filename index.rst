@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+===================================
 Welcome to CMK2PDF's documentation!
-=====================================
+===================================
 
 CMK2PDF is a plugin for `K2 component <http://www.getk2.org/>`_ to give you and your site's visitors ability to view your K2 articles in PDF format, in this way we can not only print K2 articles but also can download them for offline reading.
 
@@ -13,7 +14,7 @@ Conversion from HTML document to PDF document is powered by `MPDF PHP library <h
 This documention gives you instruction to install and setup CMK2PDF and MPDF on your Joomla! website.
 
 Technical Requirements
-----------------------
+======================
 
 CMK2PDF is compatible with Joomla! 3.x.x. CMK2PDF is **NOT** compatible with Joomla! 1.x.x. CMK2PDF could be used on Joomla! 2.5.x, but this is not tested yet.
 
@@ -24,19 +25,19 @@ CMK2PDF is built and tested on K2 2.6.9. It could be used with other older versi
 The latest version of Joomla! and K2 are always recommended for stability and security.
 
 Install CMK2PDF
----------------
+===============
 
 Installing CMK2PDF is very easy, you just need to upload and install its package via Joomla! Extension Manager, just like you install any other Joomla! extensions.
 
 To update CMK2PDF, you just need to install the new version's package.
 
 Install MPDF library
---------------------
+====================
 
 CMK2PDF requires MPDF library to convert HTML to PDF, you also need to install MPDF library.
 
 By uploading the package
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 Because the package of MPDF PHP library is about 47MB, so if your server allows to upload more than 47MB you can install this package via Extension Manager just like installing any other Joomla! extensions. However if you can't install by using "Upload Package File" option, you can use "Install from Directory" option. The following instruction is for installing via "Install from Directory" option.
 
@@ -70,7 +71,7 @@ Click "Install" button the library will be installed, you will get the successfu
 Now mPDF library is installed, you can delete "mpdf.zip" file and "mpdf" folder in your "tmp" folder.
 
 By installing from URL
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 You can also install MPDF by using direct link to Github's archive. In Joomla! Extension Manager, you switch to "Install from URL" tab, put the link https://github.com/cmextension/mpdf/archive/master.zip into "Install URL" field and click "Install".
 
@@ -78,17 +79,19 @@ You can also install MPDF by using direct link to Github's archive. In Joomla! E
 
 
 Configure CMK2PDF
------------------
+=================
 
-In your Joomla! back-end navigate to Extensions -> Plugins, search for "pdf" to find "K2 - CMK2PDF" plugin.
+In your Joomla! back-end navigate to Extensions -> Plugins, search for "pdf" to find "K2 - PDF for K2 (CMK2PDF)" plugin.
 
 .. image:: /images/plugin_list.jpg
 
 
-Edit the plugin you find the following options:
+Edit the plugin you find 4 tabs for the plugin's configuration: Plugin, Page, Margin and Header & Footer.
+
+Plugin tab
+----------
 
 .. image:: /images/plugin_detail.jpg
-
 
 **Parameter string**
 
@@ -135,6 +138,8 @@ Example: If your parameter string is "pdf=true" then the URL of your article cou
 
 Your K2 article often doesn't inlude any CSS styles, the PDF version of it is also created from plain HTML. So if you want your PDF version looks the same or similar to your HTML version, you may need to include some CSS files to decorate your article. These CSS files often come from your template or your own custom CSS files.
 
+Not all CSS attributes are supported by MPDF library, you can see what MPDF supports at `http://mpdf1.com/manual/index.php?tid=34 <http://mpdf1.com/manual/index.php?tid=34/>`_.
+
 To include these files, you enter their paths into "Additional CSS files" field, one path per line.
 
 If your files come from your current template, their paths often starts with "templates/". If they are in the folders of other components, their paths starts with "components/".
@@ -143,10 +148,62 @@ For example, if you want to include the CSS file of Protostart template (the def
 
 In order to know what CSS you need to include, you can check your template's documentation, ask the template's author or contact us for support.
 
-**Include article's ttile**
+**Force Download**
+
+Force user to download PDF file instead of viewing it on browser.
+
+**Include Intro Text**
+
+Include article's intro text in PDF, it is showed before the main content of article.
+
+**Include Article's Ttile**
 
 By default your article's title is included in its content. If you want to display the article's title on the top of your PDF document, you switch this option to "Yes".
 
-**Article title's heading**
+**Article Title's Heading**
 
 This option give you ability to choose the heading style of your article's title if you set"Include article's ttile" to "Yes". You can wrap your title with <h1>, <h2>, <h3> or <h4> HTML element.
+
+**Include Extra Fields**
+
+If you include extra fields, they are shown after article's content.
+
+The HTML code of extra fields is the same to the default code of K2 with the CSS classes like 
+itemExtraFields, itemExtraFieldsHeader, itemExtraFieldsLabel, itemExtraFieldsValue... So you just need to include your CSS file then the output of extra fields could be the same to article's HTML version.
+
+**Wrap Document With A Locale**
+
+If the content of your article is not English and requires special font to show (for example Russian, Korean, Hebrew,...), you should select your language in this option.
+
+If your article have many languages which have UTF-8 characters, you should wrap the paragraphs with "lang" attribute and their 2 letter language code (ISO 639-1). For example "ru" for Russian, "ko" for Korean. You can find the list of language code at `https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes <https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>`_. If your languages only use Latin characters, you don't need to set any language code.
+
+Example: <p lang="ru">This text is in Russian</p>
+
+.. image:: /images/article_language.jpg
+
+Page tab
+--------
+
+.. image:: /images/plugin_detail_page.jpg
+
+**Format**
+
+You configure the page format of your PDF document. The popular format is A4.
+
+**Orientation**
+
+The PDF documentation is in portrait or landscape orientation.
+
+Margin tab
+----------
+
+.. image:: /images/plugin_detail_margin.jpg
+
+In this tab you can configure the left, right, top and bottom margin of your document. The values are in millimetres.
+
+Header & Footer tab
+-------------------
+
+.. image:: /images/plugin_detail_header_footer.jpg
+
+With these options you can configure to show or hide the header and footer of your documentation. The header and footer can have title and/or page number, they can be shown on the left side, right side or in the middle.  The values of header and footer margins of are in millimetres.
