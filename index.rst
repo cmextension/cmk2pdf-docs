@@ -207,3 +207,12 @@ Header & Footer tab
 .. image:: /images/plugin_detail_header_footer.jpg
 
 With these options you can configure to show or hide the header and footer of your documentation. The header and footer can have title and/or page number, they can be shown on the left side, right side or in the middle.  The values of header and footer margins of are in millimetres.
+
+Customize PDF output
+====================
+
+CMK2PDF has a default layout, to customize this layout to build your own PDF output, you create this file
+
+    plugins/k2/cmk2pdf/layouts/override.php
+
+Copy the content of default.php in the same folder into override.php. Now you can modify override.php to build our own output. Your changes will not be lost when you update CMK2PDF.
